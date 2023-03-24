@@ -1,4 +1,10 @@
 import { createTimeTraveller } from './timeTraveller';
-import { TimeTravellerProvider } from './TimeTravellerProvider';
+import { TimeTravellerProvider, useTimeTraveller } from './TimeTravellerProvider';
+import { useTimeTravellerState } from './useTimeTravellerState';
 
-export { createTimeTraveller, TimeTravellerProvider };
+export {
+    createTimeTraveller,
+    TimeTravellerProvider,
+    useTimeTraveller,
+    useTimeTravellerState
+};

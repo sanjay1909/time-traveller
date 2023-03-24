@@ -9,7 +9,10 @@
     "test": "jest",
     "lint": "eslint src/",
     "docs": "jsdoc -c jsdoc.conf.json",
-    "docs:serve": "http-server docs -o"
+    "docs:serve": "http-server docs -o",
+    "version": "npm version patch && git push && git push --tags",
+    "minor": "npm version minor && git push && git push --tags",
+    "major": "npm version major && git push && git push --tags"
   },
   "keywords": [],
   "author": "",
