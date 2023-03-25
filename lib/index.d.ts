@@ -1,4 +1,4 @@
-declare module 'timeTraveller' {
+declare module 'time-traveller' {
     export interface TimeTraveller {
         apply: (operation: string, data: any, tags?: string[]) => any;
         undo: () => any;
