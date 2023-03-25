@@ -10,6 +10,7 @@
     "lint": "eslint src/",
     "docs": "jsdoc -c jsdoc.conf.json",
     "docs:serve": "http-server docs -o",
+    "check-types": "tsc --noEmit",
     "version": "npm version patch && git push && git push --tags",
     "minor": "npm version minor && git push && git push --tags",
     "major": "npm version major && git push && git push --tags"
@@ -38,6 +39,7 @@
     "jsdoc": "^4.0.2",
     "jsdoc-webpack-plugin": "^0.3.0",
     "tui-jsdoc-template": "^1.2.2",
+    "typescript": "^5.0.2",
     "webpack": "^5.76.3",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.13.1"
