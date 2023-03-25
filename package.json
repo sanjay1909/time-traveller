@@ -1,6 +1,6 @@
 {
   "name": "time-traveller",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "",
   "main": "lib/timeTraveller.min.js",
   "module": "lib/timeTraveller.min.js",
