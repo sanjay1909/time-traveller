@@ -1,5 +1,5 @@
 {
-  "name": "time-traveller",
+  "name": "timeTraveller",
   "version": "1.2.1",
   "description": "",
   "main": "lib/timeTraveller.min.js",
