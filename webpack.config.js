@@ -1,10 +1,9 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const JSDocWebpackPlugin = require('jsdoc-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
     output: {
-        path: __dirname + '/dist',
+        path: __dirname + '/lib',
         filename: 'timeTraveller.min.js',
         library: 'TimeTraveller',
         libraryTarget: 'umd',
@@ -29,9 +28,6 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html',
-        }),
-        new JSDocWebpackPlugin({
-            conf: './jsdoc.conf.json',
         }),
     ],
 };
