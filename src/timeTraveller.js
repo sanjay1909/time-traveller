@@ -71,13 +71,22 @@ export const createTimeTraveller = (snapshotInterval = 10) => {
         return states.filter((state) => state.tags.includes(tagFilter));
     };
 
+    const canUndo = () => {
+        return current > 0;
+    };
+
+    const canRedo = () => {
+        return current < states.length - 1;
+    };
+
     return {
         apply,
         undo,
         redo,
+        canUndo,
+        canRedo,
         jumpTo,
         delete: deleteState,
         filterStates,
     };
 };
-

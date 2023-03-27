@@ -1,20 +1,33 @@
-import { useState } from 'react';
-import { useTimeTraveller } from './TimeTravellerProvider';
+// useTimeTravellerState.js
+import { useState, useEffect, useCallback } from 'react';
+import { useTimeTraveller, useComponentKey } from './TimeTravellerProvider';
 
-/**
- * Custom useState hook with time-traveling functionality.
- * @param {*} initialValue - The initial state value.
- * @returns {[*, function]} - A tuple with the current state and a function to update the state.
- */
 export const useTimeTravellerState = (initialValue) => {
     const [state, setState] = useState(initialValue);
-    const { timeTraveller } = useTimeTraveller();
+    const { timeTraveller, subscribe, unsubscribe, notify, link, unlink } = useTimeTraveller();
+    const componentKey = useComponentKey();
 
-    const setTTState = (newState) => {
-        const patch = createPatch(state, newState);
-        const updatedState = timeTraveller.apply(patch);
-        setState(updatedState);
-    };
+    useEffect(() => {
+        subscribe(componentKey, (newState) => {
+            setState(newState);
+        });
+        return () => {
+            unsubscribe(componentKey);
+        };
+    }, [componentKey, subscribe, unsubscribe]);
 
-    return [state, setTTState];
+    const setTTState = useCallback(
+        (newState) => {
+            try {
+                const patch = createPatch(state, newState);
+                const updatedState = timeTraveller.apply(patch);
+                notify(componentKey, updatedState);
+            } catch (error) {
+                console.error('Error while setting the Time Traveller state:', error);
+            }
+        },
+        [state, timeTraveller, notify, componentKey]
+    );
+
+    return [state, setTTState, { link, unlink }];
 };

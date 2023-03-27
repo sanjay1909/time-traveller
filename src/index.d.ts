@@ -1,29 +1,36 @@
+// timeTraveller.d.ts
 declare module 'time-traveller' {
-    export interface TimeTraveller {
-        apply: (operation: string, data: any, tags?: string[]) => any;
-        undo: () => any;
-        redo: () => any;
-        delete: () => void;
-        jumpTo: (index: number) => any;
-        filterStatesByTags: (tags: string[]) => any[];
-    }
+    export function createTimeTraveller(snapshotInterval?: number): object;
 
-    export function createTimeTraveller(initialState?: object): TimeTraveller;
-
-    // React-specific types
-    import * as React from 'react';
-
-    export interface TimeTravellerProviderProps {
+    export function TimeTravellerProvider(props: {
+        snapshotInterval?: number;
         children: React.ReactNode;
-        initialState?: object;
-    }
+    }): React.ReactElement;
 
-    export function TimeTravellerProvider(props: TimeTravellerProviderProps): JSX.Element;
-    export function useTimeTraveller(): { timeTraveller: TimeTraveller; initialState: object };
-    export function useTimeTravellerState<T>(initialState: T): [T, React.Dispatch<React.SetStateAction<T>>];
-    export function useTimeTravellerReducer<T>(
-        reducer: React.Reducer<T, any>,
-        initialState: T,
-        initializer?: undefined
-    ): [T, React.Dispatch<any>];
+    export function useTimeTraveller(): {
+        timeTraveller: {
+            apply: Function;
+            undo: Function;
+            redo: Function;
+            jumpTo: Function;
+            delete: Function;
+            filterStates: Function;
+        };
+        subscribe: Function;
+        unsubscribe: Function;
+        notify: Function;
+        link: Function;
+        unlink: Function;
+        links: object;
+    };
+
+    export function useTimeTravellerState(initialValue: any): [any, Function, object];
+
+    export function useTimeTravellerReducer(
+        reducer: (state: any, action: any) => any,
+        initialState: any,
+        initializer?: (initialArg: any) => any
+    ): [any, (action: any) => void, object];
+
+    export function useTimeTravellerGlobalState(globalKey: string, initialState: any): [any, Function, object];
 }
