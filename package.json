@@ -1,6 +1,6 @@
 {
   "name": "time-traveller",
-  "version": "1.2.3",
+  "version": "2.0.0",
   "description": "A state management library for React applications with undo, redo, and state linking functionalities",
   "main": "lib/timeTraveller.min.js",
   "module": "lib/timeTraveller.min.js",
